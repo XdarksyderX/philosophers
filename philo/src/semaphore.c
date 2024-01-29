@@ -19,7 +19,7 @@ void	sem_wait(t_semaphore *sem)
 	while (sem->count <= 0)
 	{
 		pthread_mutex_unlock(&sem->mutex);
-		usleep(10);
+		usleep(1000);
 		pthread_mutex_lock(&sem->mutex);
 	}
 	sem->count--;

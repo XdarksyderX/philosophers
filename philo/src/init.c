@@ -48,7 +48,7 @@ static t_simulation_data	*ft_fill_data(t_simulation_data *data)
 	}
 	pthread_mutex_init(&data->mutex_simulation, NULL);
 	pthread_mutex_init(&data->mutex_output, NULL);
-	sem_init(&data->sem, (int) data->total_philosophers / 2);
+	sem_init(&data->sem, (int) data->total_philosophers / 2 + 1);
 	return (data);
 }
 

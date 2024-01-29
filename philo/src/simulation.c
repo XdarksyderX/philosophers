@@ -51,11 +51,12 @@ static void	*ft_monitor(void *data)
 			pthread_mutex_unlock(&sim_data->philosophers[i]->mutex_philosopher);
 			i++;
 		}
+		usleep(100);
 	}
 	return (NULL);
 }
 
-static void	ft_create_threads(t_simulation_data *data)
+void	ft_create_threads(t_simulation_data *data)
 {
 	int	i;
 
