@@ -5,6 +5,8 @@ static void	*ft_philosopher(void *philosopher)
 	t_philosopher	*phil;
 
 	phil = (t_philosopher *)philosopher;
+	if (phil->id % 2 != 0)
+		usleep(100);
 	while (!phil->shared_data->is_simulation_ended && !phil->is_satiated)
 	{
 		ft_take_forks(phil);
@@ -44,6 +46,8 @@ static void	*ft_monitor(void *data)
 			if (ft_timestamp() - sim_data->philosophers[i]->last_meal_timestamp
 				> sim_data->max_time_to_die || ft_is_simulation_ended(sim_data))
 			{
+				if (ft_is_simulation_ended(sim_data))
+					return (NULL);
 				ft_print_status(sim_data->philosophers[i], "died\n");
 				sim_data->is_simulation_ended = true;
 				return (NULL);
@@ -51,7 +55,7 @@ static void	*ft_monitor(void *data)
 			pthread_mutex_unlock(&sim_data->philosophers[i]->mutex_philosopher);
 			i++;
 		}
-		usleep(100);
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -70,7 +74,6 @@ void	ft_create_threads(t_simulation_data *data)
 		}
 		i++;
 	}
-
 	i = 0;
 	while (i < data->total_philosophers)
 	{
@@ -92,16 +95,7 @@ void	ft_start_simulation(t_simulation_data *data)
 	i = 0;
 	while (i < data->total_philosophers)
 	{
-		if (i % 2 == 0)
-			pthread_join(data->philosophers[i]->thread_id, NULL);
-		i++;
-	}
-
-	i = 0;
-	while (i < data->total_philosophers)
-	{
-		if (i % 2 != 0)
-			pthread_join(data->philosophers[i]->thread_id, NULL);
+		pthread_join(data->philosophers[i]->thread_id, NULL);
 		i++;
 	}
 	pthread_join(data->thread_monitor, NULL);

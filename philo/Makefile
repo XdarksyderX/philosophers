@@ -3,7 +3,7 @@ CC = gcc
 INC = -I./inc
 CFLAGS = -g -Wall -Wextra -Werror -pthread $(INC)
 
-SRC = main.c src/init.c src/management.c src/simulation.c src/util.c src/actions.c src/semaphore.c
+SRC = main.c src/init.c src/management.c src/simulation.c src/util.c src/actions.c
 OBJ = $(SRC:%.c=obj/%.o)
 
 all: $(NAME)

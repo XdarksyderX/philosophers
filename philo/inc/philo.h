@@ -13,12 +13,6 @@
 
 typedef struct s_simulation_data	t_simulation_data;
 
-typedef struct s_semaphore
-{
-	pthread_mutex_t	mutex;
-	int				count;
-}	t_semaphore;
-
 typedef struct s_dining_fork
 {
 	pthread_mutex_t	mutex;
@@ -54,7 +48,6 @@ typedef struct s_simulation_data
 	pthread_mutex_t	mutex_simulation;
 	pthread_mutex_t	mutex_output;
 	pthread_t		thread_monitor;
-	t_semaphore		sem;
 	bool			is_simulation_ended;
 
 }	t_simulation_data;
@@ -75,11 +68,6 @@ void	ft_sleep(t_philosopher *philosopher);
 
 t_simulation_data	*ft_init_data(int argc, char **argv);
 void	ft_start_simulation(t_simulation_data *data);
-
-void	sem_init(t_semaphore *sem, int count);
-void	sem_destroy(t_semaphore *sem);
-void	sem_wait(t_semaphore *sem);
-void	sem_signal(t_semaphore *sem);
 
 void	ft_clean_exit(t_simulation_data *data);
 

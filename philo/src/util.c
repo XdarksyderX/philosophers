@@ -1,6 +1,8 @@
 
 #include "philo.h"
 
+
+
 int	ft_timestamp(void)
 {
 	struct timeval	tv;

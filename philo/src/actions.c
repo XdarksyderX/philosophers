@@ -2,7 +2,6 @@
 
 void	ft_take_forks(t_philosopher *philosopher)
 {
-	sem_wait(&philosopher->shared_data->sem);
 	if (philosopher->shared_data->is_simulation_ended)
 		return ;
 	if (philosopher->id % 2 == 0)
@@ -37,7 +36,6 @@ void	ft_eat(t_philosopher *philosopher)
 		&& philosopher->meals_eaten_count
 		== philosopher->shared_data->max_meals_per_philosopher)
 		philosopher->is_satiated = true;
-	sem_signal(&philosopher->shared_data->sem);
 }
 
 void	ft_sleep(t_philosopher *philosopher)
@@ -50,5 +48,14 @@ void	ft_sleep(t_philosopher *philosopher)
 
 void	ft_think(t_philosopher *philosopher)
 {
+	int	time_to_think;
+
 	ft_print_status(philosopher, "is thinking\n");
+	if (philosopher->shared_data->total_philosophers % 2 == 0)
+		return ;
+	time_to_think = (philosopher->shared_data->time_needed_to_eat
+			+ philosopher->shared_data->time_needed_to_sleep) / 2;
+	if (time_to_think < 1)
+		return ;
+	usleep(time_to_think * 1000);
 }

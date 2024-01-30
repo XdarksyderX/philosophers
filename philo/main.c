@@ -27,6 +27,6 @@ int	main(int argc, char **argv)
 		ft_error("Wrong number of arguments");
 	data = ft_init_data(argc, argv);
 	ft_start_simulation(data);
-	//ft_debug(data);
+	ft_clean_exit(data);
 	return (0);
 }

@@ -21,6 +21,5 @@ void	ft_clean_exit(t_simulation_data *data)
 	}
 	pthread_mutex_destroy(&data->mutex_simulation);
 	pthread_mutex_destroy(&data->mutex_output);
-	sem_destroy(&data->sem);
 	free(data);
 }
