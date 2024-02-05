@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: migarci2 <migarci2@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/31 13:24:16 by migarci2          #+#    #+#             */
+/*   Updated: 2024/01/31 13:34:35 by migarci2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static void	*ft_philosopher(void *philosopher)
@@ -6,7 +18,7 @@ static void	*ft_philosopher(void *philosopher)
 
 	phil = (t_philosopher *)philosopher;
 	if (phil->id % 2 != 0)
-		usleep(100);
+		ft_usleep(10);
 	while (!phil->shared_data->is_simulation_ended && !phil->is_satiated)
 	{
 		ft_take_forks(phil);
@@ -50,17 +62,17 @@ static void	*ft_monitor(void *data)
 					return (NULL);
 				ft_print_status(sim_data->philosophers[i], "died\n");
 				sim_data->is_simulation_ended = true;
-				return (NULL);
+				return (sim_data->philosophers[i]->is_dead = true, NULL);
 			}
 			pthread_mutex_unlock(&sim_data->philosophers[i]->mutex_philosopher);
 			i++;
 		}
-		usleep(10);
+		ft_usleep(10);
 	}
 	return (NULL);
 }
 
-void	ft_create_threads(t_simulation_data *data)
+static void	ft_create_threads(t_simulation_data *data)
 {
 	int	i;
 
@@ -95,8 +107,8 @@ void	ft_start_simulation(t_simulation_data *data)
 	i = 0;
 	while (i < data->total_philosophers)
 	{
-		pthread_join(data->philosophers[i]->thread_id, NULL);
+		ft_pthread_join(data->philosophers[i]->thread_id, NULL);
 		i++;
 	}
-	pthread_join(data->thread_monitor, NULL);
+	ft_pthread_join(data->thread_monitor, NULL);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: migarci2 <migarci2@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/31 13:24:34 by migarci2          #+#    #+#             */
+/*   Updated: 2024/01/31 13:24:35 by migarci2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static t_dining_fork	*ft_create_fork(int id)
@@ -27,6 +39,7 @@ static t_philosopher	*ft_create_philosopher(t_simulation_data *data, int id)
 	pthread_mutex_init(&philosopher->mutex_philosopher, NULL);
 	philosopher->shared_data = data;
 	philosopher->is_satiated = false;
+	philosopher->is_dead = false;
 	return (philosopher);
 }
 
@@ -48,7 +61,6 @@ static t_simulation_data	*ft_fill_data(t_simulation_data *data)
 	}
 	pthread_mutex_init(&data->mutex_simulation, NULL);
 	pthread_mutex_init(&data->mutex_output, NULL);
-	//sem_init(&data->sem, (int) data->total_philosophers / 2 + 2);
 	return (data);
 }
 

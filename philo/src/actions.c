@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: migarci2 <migarci2@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/31 13:24:29 by migarci2          #+#    #+#             */
+/*   Updated: 2024/01/31 13:24:30 by migarci2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	ft_take_forks(t_philosopher *philosopher)
@@ -43,7 +55,7 @@ void	ft_sleep(t_philosopher *philosopher)
 	if (philosopher->shared_data->is_simulation_ended)
 		return ;
 	ft_print_status(philosopher, "is sleeping\n");
-	usleep(philosopher->shared_data->time_needed_to_sleep * 1000);
+	ft_usleep(philosopher->shared_data->time_needed_to_sleep * 1000);
 }
 
 void	ft_think(t_philosopher *philosopher)
@@ -57,5 +69,5 @@ void	ft_think(t_philosopher *philosopher)
 			+ philosopher->shared_data->time_needed_to_sleep) / 2;
 	if (time_to_think < 1)
 		return ;
-	usleep(time_to_think * 1000);
+	ft_usleep(time_to_think * 1000);
 }

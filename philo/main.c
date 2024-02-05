@@ -1,23 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: migarci2 <migarci2@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/31 13:23:59 by migarci2          #+#    #+#             */
+/*   Updated: 2024/01/31 13:24:11 by migarci2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-
-void	ft_debug(t_simulation_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->total_philosophers)
-	{
-		printf("Philosopher %d:\n", i);
-		printf("id: %d\n", data->philosophers[i]->id);
-		printf("meals_eaten_count: %d\n", data->philosophers[i]->meals_eaten_count);
-		printf("last_meal_timestamp: %i\n", data->philosophers[i]->last_meal_timestamp);
-		printf("left_fork: %d\n", data->philosophers[i]->left_fork->fork_id);
-		printf("right_fork: %d\n", data->philosophers[i]->right_fork->fork_id);
-		printf("is_satiated: %d\n", data->philosophers[i]->is_satiated);
-		printf("\n");
-		i++;
-	}
-}
 
 int	main(int argc, char **argv)
 {
